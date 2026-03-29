@@ -1,0 +1,17 @@
+/* src/renderer/index.css — Phase 0 최소 스타일 */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #0d0d0d;
+  color: #e5e5e5;
+}
+
+#app-root {
+  width: 100vw;
+  height: 100vh;
+}

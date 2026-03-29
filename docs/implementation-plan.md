@@ -7,6 +7,28 @@
 
 ---
 
+## 0. 개발 원칙 및 행동 규칙 (Core Guidelines)
+
+이 프로젝트는 다음과 같은 확고한 원칙 하에 개발됩니다. 모든 구현은 이 규칙을 준수해야 합니다.
+
+1. **상태 분리 및 단방향 데이터 흐름 (React / 리렌더링 통제)**
+   - UI 전역 상태는 Context API + Reducer로 관리하며, 로컬 상태 최소화.
+   - IPC를 통한 데이터는 Action으로 디스패치되어 상태를 변경. (직접 변형 불가)
+
+2. **단일 책임과 독립적 모듈 테스트 (Python / Electron)**
+   - 하나의 클래스/모듈은 하나의 역할만 수행 (예: 오디오 캡처, 모델 추론, 알림 송신 각각 분리).
+   - 모든 핵심 로직 (Python L1~L5 / TypeScript IPC 등)은 프론트엔드 UI 없이 단위 테스트 가능해야 함.
+
+3. **명시적 에러 처리 및 Fallback 메커니즘**
+   - 발생 가능한 예외 상황은 반드시 캐치하여 콘솔 또는 파일(Phase 1 이후) 로깅.
+   - 실패 시 적절한 기본값이나 복구 시퀀스 작동 (예: GPU 추론 실패 시 CPU fallback, IPC 통신 단절 시 워커 재시작).
+   - 사용자에겐 "알 수 없는 에러"가 아닌 개발자가 정의한 상황 메시지를 전달.
+
+4. **점진적 구현 (Skeleton First)**
+   - 처음부터 세부 로직을 채우지 마십시오. 인터페이스(껍데기)를 선언하고, 입출력 통신(테스트)이 온전한지 검증한 후 세부를 채웁니다.
+
+---
+
 ## 구현 전략
 
 ### 왜 Skeleton First인가
@@ -97,10 +119,10 @@ luciper/
 
 ### 완료 기준
 
-- [ ] `npm run dev` → Electron 빈 창 표시
-- [ ] `python stt_worker/main.py` → stdin으로 JSON 입력하면 stdout에 응답
-- [ ] `npm test` → 0 pass, 0 fail (테스트 프레임워크 동작 확인)
-- [ ] `pytest` → 0 pass, 0 fail
+- [x] `npm run dev` → Electron 빈 창 표시
+- [x] `python stt_worker/main.py` → stdin으로 JSON 입력하면 stdout에 응답
+- [x] `npm test` → 0 pass, 0 fail (테스트 프레임워크 동작 확인)
+- [x] `pytest` → 0 pass, 0 fail
 
 ---
 
